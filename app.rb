@@ -16,7 +16,11 @@ get '/' do
 end
 
 get '/twittername' do
-  user_tweets = client.user_timeline(params[:twittername], { count: 100 } )
+  redirect "/"+params[:twittername]
+end
+
+get '/:name' do |name|
+  user_tweets = client.user_timeline(name, { count: 100 } )
   @image_urls = user_tweets.flat_map { |s| s.media}.map { |m| m.media_url.to_s}
   erb :result
 end
