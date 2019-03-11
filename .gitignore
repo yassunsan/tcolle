@@ -2,7 +2,9 @@
 /.bundle
  
 # Ignore bundler gems.
-vendor/bundle
+vendor/bundler
+
+/Gemfile.lock
  
 /log/*
 /tmp/*
