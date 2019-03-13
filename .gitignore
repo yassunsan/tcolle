@@ -3,8 +3,6 @@
  
 # Ignore bundler gems.
 vendor/bundler
-
-/Gemfile.lock
  
 /log/*
 /tmp/*
