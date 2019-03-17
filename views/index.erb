@@ -1,4 +1,15 @@
-<form action="/twittername" method="get">
-  <input type="text" name="twittername">
-  <input type="submit" value="検索">
-</form>
+<main class="container">
+  <div class="jumbotron">
+    <p>指定したユーザのツイートした画像とリツイートした画像の一覧を表示します。</p>
+    <form action="/twitterid" method="get">
+      <div class="input-group row no-gutters">
+        <div class="col-3">
+          <input type="text" class="form-control" placeholder="TwitterID" name="twitterid">
+        </div>
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</main>

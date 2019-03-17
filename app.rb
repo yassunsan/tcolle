@@ -15,8 +15,8 @@ get '/' do
   erb :index
 end
 
-get '/twittername' do
-  redirect "/"+params[:twittername]
+get '/twitterid' do
+  redirect "/"+params[:twitterid]
 end
 
 get '/:name' do |name|
