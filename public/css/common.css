@@ -4,6 +4,11 @@ body{
   background-color: #333;
 }
 
+.img-trim {
+    width: 100%;
+    object-fit: cover;
+}
+
 .no-gutters {
     margin:0;
     padding:0;
