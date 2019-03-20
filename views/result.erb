@@ -2,10 +2,11 @@
   <div class="row no-gutters">
     <% @image_tweets.each do |image_tweet| %>
     <div class="col-2">
-        <a href=<%=image_tweet[0] %>>
-          <img src="<%= image_tweet[1] %>" class="img-trim img-fluid">
-        </a>
+      <a href=<%=image_tweet[0] %>>
+        <img src="<%= image_tweet[1] %>" class="img-trim img-fluid">
+      </a>
     </div>
     <% end %>
   </div>
 </div>
+<div id="loadimg"></div>
