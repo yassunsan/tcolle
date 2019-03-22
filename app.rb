@@ -1,5 +1,6 @@
 require "sinatra"
 require "sinatra/reloader"
+require "sinatra/json"
 require "twitter"
 require "dotenv"
 
@@ -11,6 +12,11 @@ client = Twitter::REST::Client.new do |config|
   config.access_token_secret = ENV["ACCESS_TOKEN_SECRET"]
 end
 
+configure do
+  enable :sessions
+	use Rack::Session::Cookie
+end
+
 get '/' do
   erb :index
 end
@@ -19,8 +25,18 @@ get '/twitterid' do
   redirect "/"+params[:twitterid]
 end
 
+get '/additionalload' do
+  user_tweets = client.user_timeline(session[:twitterid], { count: 200, max_id: session[:last_tweet]} )
+  session[:last_tweet] = user_tweets.last.id
+  image_urls = user_tweets.flat_map { |s| s.media}.map { |m| m.media_url.to_s}
+  image_tweet_urls = user_tweets.flat_map{ |s| s.media}.map { |m| m.uri.to_s}
+  json image_tweet_urls.zip(image_urls)
+end
+
 get '/:name' do |name|
-  user_tweets = client.user_timeline(name, { count: 100 } )
+  session[:twitterid] = name
+  user_tweets = client.user_timeline(session[:twitterid], { count: 200 } )
+  session[:last_tweet] = user_tweets.last.id
   image_urls = user_tweets.flat_map { |s| s.media}.map { |m| m.media_url.to_s}
   image_tweet_urls = user_tweets.flat_map{ |s| s.media}.map { |m| m.uri.to_s}
   @image_tweets = image_tweet_urls.zip(image_urls)
