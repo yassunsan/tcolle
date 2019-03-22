@@ -13,7 +13,6 @@ client = Twitter::REST::Client.new do |config|
 end
 
 configure do
-  enable :sessions
 	use Rack::Session::Cookie
 end
 
