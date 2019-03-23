@@ -26,18 +26,19 @@ end
 
 get '/additionalload' do
   user_tweets = client.user_timeline(session[:twitterid], { count: 200, max_id: session[:last_tweet] - 1} )
-  session[:last_tweet] = user_tweets.last.id
-  image_urls = user_tweets.flat_map { |s| s.media}.map { |m| m.media_url.to_s}
-  image_tweet_urls = user_tweets.flat_map{ |s| s.media}.map { |m| m.uri.to_s}
-  json image_tweet_urls.zip(image_urls)
+  json image_tweets(user_tweets)
 end
 
 get '/:name' do |name|
   session[:twitterid] = name
   user_tweets = client.user_timeline(session[:twitterid], { count: 200 } )
+  @image_tweets = image_tweets(user_tweets)
+  erb :result
+end
+
+def image_tweets(user_tweets)
   session[:last_tweet] = user_tweets.last.id
   image_urls = user_tweets.flat_map { |s| s.media}.map { |m| m.media_url.to_s}
   image_tweet_urls = user_tweets.flat_map{ |s| s.media}.map { |m| m.uri.to_s}
-  @image_tweets = image_tweet_urls.zip(image_urls)
-  erb :result
+  image_tweet_urls.zip(image_urls)
 end
