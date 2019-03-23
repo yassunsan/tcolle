@@ -31,6 +31,7 @@ end
 
 get '/:name' do |name|
   session[:twitterid] = name
+  @user = client.user(session[:twitterid])
   user_tweets = client.user_timeline(session[:twitterid], { count: 200 } )
   @image_tweets = image_tweets(user_tweets)
   erb :result
