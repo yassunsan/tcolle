@@ -25,7 +25,7 @@ get '/twitterid' do
 end
 
 get '/additionalload' do
-  user_tweets = client.user_timeline(session[:twitterid], { count: 200, max_id: session[:last_tweet]} )
+  user_tweets = client.user_timeline(session[:twitterid], { count: 200, max_id: session[:last_tweet] - 1} )
   session[:last_tweet] = user_tweets.last.id
   image_urls = user_tweets.flat_map { |s| s.media}.map { |m| m.media_url.to_s}
   image_tweet_urls = user_tweets.flat_map{ |s| s.media}.map { |m| m.uri.to_s}
