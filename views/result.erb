@@ -3,7 +3,7 @@
     <div class="jumbotron">
       <div class="media d-flex align-items-center">
         <div class="float-left mr-3">
-          <a href=<%= @user.uri %>>
+          <a href=<%= @user.uri %> target="_blank">
             <img src=<%= @user.profile_image_uri %> class="img-fluid" width="48px" height="48px">
           </a>
         </div>
@@ -19,7 +19,7 @@
     <div class="row no-gutters">
       <% @image_tweets.each do |image_tweet| %>
       <div class="col-2">
-        <a href=<%=image_tweet[0] %>>
+        <a href=<%=image_tweet[0] %> target="_blank">
           <img src="<%= image_tweet[1] %>" class="img-trim img-fluid">
         </a>
       </div>
